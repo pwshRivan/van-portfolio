@@ -12,8 +12,6 @@
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/rivaannnn)
 [![Email](https://img.shields.io/badge/Email-Contact-EA4335?style=for-the-badge&logo=gmail)](mailto:muhamadrivansahronie@gmail.com)
 
----
-
 ### 📫 Connect
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-rivaannnn-0A66C2?style=flat&logo=linkedin)](https://linkedin.com/in/rivaannnn)
