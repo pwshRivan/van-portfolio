@@ -1,98 +1,57 @@
-import { useState, memo, useEffect } from "react";
-import { createPortal } from "react-dom";
+import { useState, memo, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { motion as Motion } from "motion/react";
-import {
-  ExternalLink,
-  Github,
-  ChevronLeft,
-  ChevronRight,
-  Folder,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { PROJECTS_DATA } from "@/data/portfolioData";
-import { Card } from "../ui/Card";
+import { useScrollLock } from "@/hooks/useScrollLock";
+import ProjectFilters from "./projects/ProjectFilters";
+import ProjectCard from "./projects/ProjectCard";
+import UnavailableModal from "./projects/UnavailableModal";
+import ProjectsBackground from "./projects/ProjectsBackground";
 
-const ProjectsSection = memo(() => {
-  const { t } = useTranslation();
-  const [filter, setFilter] = useState("All");
-  const [showUnavailableModal, setShowUnavailableModal] = useState(false);
-  const [unavailableProject, setUnavailableProject] = useState("");
+const CATEGORIES = ["All", "Frontend", "Backend", "Fullstack"];
 
-  const handleUnavailableClick = (projectTitle) => {
-    setUnavailableProject(projectTitle);
-    setShowUnavailableModal(true);
-  };
+const filterProjects = (projects, filter) => {
+  if (filter === "All") return projects;
 
-  // Lock body scroll when modal is open
-  useEffect(() => {
-    if (showUnavailableModal) {
-      // Lock body scroll
-      document.body.style.overflow = "hidden";
+  return projects.filter((project) => {
+    const techString = project.tech.join(" ").toLowerCase();
 
-      // Lock Lenis scroll
-      const lenis = window.lenis;
-      if (lenis) {
-        lenis.stop();
-      }
-    } else {
-      // Unlock body scroll
-      document.body.style.overflow = "unset";
-
-      // Unlock Lenis scroll
-      const lenis = window.lenis;
-      if (lenis) {
-        lenis.start();
-      }
+    if (filter === "Frontend") {
+      return techString.includes("react") || techString.includes("tailwind");
     }
 
-    return () => {
-      document.body.style.overflow = "unset";
-      const lenis = window.lenis;
-      if (lenis) {
-        lenis.start();
-      }
-    };
-  }, [showUnavailableModal]);
-
-  // Animation variants
-  const headerVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
-    },
-  };
-
-  const filterVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] },
-    },
-  };
-
-  const categories = ["All", "Frontend", "Backend", "Fullstack"];
-
-  const filteredProjects = PROJECTS_DATA.filter((project) => {
-    if (filter === "All") return true;
-    const techString = project.tech.join(" ").toLowerCase();
-    if (filter === "Frontend")
-      return techString.includes("react") || techString.includes("tailwind");
-    if (filter === "Backend")
+    if (filter === "Backend") {
       return (
         techString.includes("node") ||
         techString.includes("php") ||
         techString.includes("laravel")
       );
+    }
+
     return true;
   });
+};
+
+const ProjectsSection = memo(() => {
+  const { t } = useTranslation();
+  const [filter, setFilter] = useState("All");
+  const [showUnavailableModal, setShowUnavailableModal] = useState(false);
+
+  useScrollLock(showUnavailableModal);
+
+  const filteredProjects = useMemo(
+    () => filterProjects(PROJECTS_DATA, filter),
+    [filter]
+  );
+
+  const handleUnavailableClick = () => setShowUnavailableModal(true);
+  const handleCloseModal = () => setShowUnavailableModal(false);
 
   return (
     <>
@@ -100,80 +59,15 @@ const ProjectsSection = memo(() => {
         id="projects"
         className="py-16 md:py-24 min-h-screen relative overflow-hidden bg-(--color-bg-primary)"
       >
-        {/* Background Decorations */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {/* Floating Icons */}
-          <Motion.div
-            animate={{
-              y: [0, -18, 0],
-              rotate: [0, 8, 0],
-            }}
-            transition={{
-              duration: 7,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="absolute top-32 left-1/4 opacity-5"
-          >
-            <Folder size={85} style={{ color: "var(--color-accent)" }} />
-          </Motion.div>
-          <Motion.div
-            animate={{
-              y: [0, 15, 0],
-              rotate: [0, -8, 0],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1.2,
-            }}
-            className="absolute bottom-40 right-1/3 opacity-5"
-          >
-            <Github size={80} style={{ color: "var(--color-accent)" }} />
-          </Motion.div>
-
-          {/* Gradient Orbs */}
-          <Motion.div
-            animate={{
-              x: [0, -35, 0],
-              y: [0, 40, 0],
-              scale: [1, 1.18, 1],
-            }}
-            transition={{
-              duration: 12,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="absolute top-20 right-10 w-[400px] h-[400px] bg-linear-to-br from-indigo-500/15 to-purple-500/15 rounded-full blur-3xl"
-          />
-          <Motion.div
-            animate={{
-              x: [0, 40, 0],
-              y: [0, -35, 0],
-              scale: [1, 1.15, 1],
-            }}
-            transition={{
-              duration: 14,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2,
-            }}
-            className="absolute bottom-20 left-10 w-[420px] h-[420px] bg-linear-to-tr from-cyan-500/15 to-blue-500/15 rounded-full blur-3xl"
-          />
-
-          {/* Accent Lines */}
-          <div className="absolute top-1/4 left-20 w-40 h-0.5 bg-linear-to-r from-transparent via-(--color-accent) to-transparent opacity-30" />
-          <div className="absolute bottom-1/4 right-20 w-36 h-0.5 bg-linear-to-r from-transparent via-(--color-accent) to-transparent opacity-30" />
-        </div>
+        <ProjectsBackground />
 
         <div className="container mx-auto px-6 relative z-10">
           {/* Header */}
           <Motion.div
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            variants={headerVariants}
+            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="max-w-3xl mx-auto text-center mb-16"
           >
             <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full text-sm font-medium bg-(--color-surface) border border-(--color-border) text-(--color-text-secondary) mb-6">
@@ -192,31 +86,16 @@ const ProjectsSection = memo(() => {
 
           {/* Filter Tabs */}
           <Motion.div
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            variants={filterVariants}
-            className="flex justify-center mb-12"
+            transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            <div className="flex p-1 rounded-full border border-(--color-border) bg-(--color-bg-secondary)">
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setFilter(category)}
-                  aria-label={`Filter projects by ${category}`}
-                  className={`relative px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                    filter === category
-                      ? "text-(--color-bg-primary)"
-                      : "text-(--color-text-secondary) hover:text-(--color-text-primary)"
-                  }`}
-                >
-                  {filter === category && (
-                    <div className="absolute inset-0 rounded-full bg-(--color-accent)" />
-                  )}
-                  <span className="relative z-10">{category}</span>
-                </button>
-              ))}
-            </div>
+            <ProjectFilters
+              categories={CATEGORIES}
+              activeFilter={filter}
+              onFilterChange={setFilter}
+            />
           </Motion.div>
 
           {/* Swiper Carousel */}
@@ -258,90 +137,17 @@ const ProjectsSection = memo(() => {
                 disableOnInteraction: false,
               }}
               breakpoints={{
-                640: {
-                  slidesPerView: 2,
-                },
-                1024: {
-                  slidesPerView: 3,
-                },
+                640: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
               }}
               className="pb-12!"
             >
               {filteredProjects.map((project) => (
                 <SwiperSlide key={project.id} className="h-auto">
-                  <div className="h-full group">
-                    <Card
-                      variant="project"
-                      padding="none"
-                      className="h-full flex flex-col min-h-[450px]"
-                    >
-                      {/* Image */}
-                      <div className="relative h-56 overflow-hidden bg-(--color-bg-tertiary) shadow-sm">
-                        <img
-                          src={project.image}
-                          alt={project.title}
-                          loading="lazy"
-                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                        />{" "}
-                        {/* Overlay on Hover */}
-                        <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-4">
-                          {project.link ? (
-                            <a
-                              href={project.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="p-3 rounded-full transition-all duration-200 bg-(--color-accent) text-(--color-bg-primary) hover:scale-110 active:scale-95"
-                              title="Visit Website"
-                            >
-                              <ExternalLink size={20} />
-                            </a>
-                          ) : (
-                            <button
-                              onClick={() =>
-                                handleUnavailableClick(project.title)
-                              }
-                              className="p-3 rounded-full transition-all duration-200 bg-(--color-accent) text-(--color-bg-primary) hover:scale-110 active:scale-95"
-                              title="Website Unavailable"
-                            >
-                              <ExternalLink size={20} />
-                            </button>
-                          )}
-                          <a
-                            href={project.repo}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-3 rounded-full transition-all duration-200 bg-(--color-accent) text-(--color-bg-primary) hover:scale-110 active:scale-95"
-                            title="View Repository"
-                          >
-                            <Github size={20} />
-                          </a>
-                        </div>
-                      </div>
-
-                      {/* Content */}
-                      <div className="p-6 flex-1 flex flex-col">
-                        <h3 className="text-xl md:text-2xl font-bold mb-3 transition-colors text-(--color-text-primary)">
-                          {project.title}
-                        </h3>
-
-                        <p className="mb-4 leading-relaxed text-(--color-text-secondary) flex-1">
-                          {t(project.desc)}
-                        </p>
-
-                        {/* Tech Stack */}
-                        <div className="flex flex-wrap gap-2 mt-auto">
-                          {project.tech.map((tech) => (
-                            <span
-                              key={tech}
-                              className="px-3 py-1 text-xs font-medium rounded-full transition-all duration-200 cursor-default bg-(--color-overlay) text-(--color-text-secondary) hover:bg-(--color-overlay-hover) hover:scale-105"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </Card>
-                  </div>
+                  <ProjectCard
+                    project={project}
+                    onUnavailableClick={handleUnavailableClick}
+                  />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -358,46 +164,10 @@ const ProjectsSection = memo(() => {
         </div>
       </section>
 
-      {/* Unavailable Website Modal - Rendered via Portal to body */}
-      {showUnavailableModal &&
-        createPortal(
-          <Motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-9999 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
-            style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0 }}
-            onClick={(e) => e.preventDefault()}
-            onScroll={(e) => e.preventDefault()}
-          >
-            <Motion.div
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
-              className="max-w-md w-full rounded-2xl p-8 bg-(--color-bg-secondary) border border-(--color-border) text-center relative"
-            >
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center bg-(--color-overlay)">
-                <ExternalLink
-                  size={32}
-                  className="text-(--color-text-secondary)"
-                />
-              </div>
-              <h3 className="text-2xl font-bold mb-3 text-(--color-text-primary)">
-                {t("projects.unavailable_title")}
-              </h3>
-              <p className="text-base mb-6 text-(--color-text-secondary) leading-relaxed">
-                {t("projects.unavailable_desc")}
-              </p>
-              <button
-                onClick={() => setShowUnavailableModal(false)}
-                className="w-full px-6 py-3 rounded-full font-semibold transition-all bg-(--color-accent) text-(--color-bg-primary) hover:scale-105 active:scale-95"
-              >
-                {t("projects.close")}
-              </button>
-            </Motion.div>
-          </Motion.div>,
-          document.body
-        )}
+      <UnavailableModal
+        isOpen={showUnavailableModal}
+        onClose={handleCloseModal}
+      />
     </>
   );
 });

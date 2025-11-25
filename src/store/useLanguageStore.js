@@ -1,26 +1,22 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-/**
- * Language Store
- * Manages language state (en/id) with persistence
- */
 const useLanguageStore = create(
   persist(
     (set, get) => ({
       // State
-      language: 'id', // Default to Indonesian
+      language: "id",
 
       // Actions
       setLanguage: (language) => set({ language }),
 
       toggleLanguage: () => {
-        const newLang = get().language === 'en' ? 'id' : 'en';
+        const newLang = get().language === "en" ? "id" : "en";
         set({ language: newLang });
       },
     }),
     {
-      name: 'language-storage',
+      name: "language-storage",
       partialize: (state) => ({
         language: state.language,
       }),

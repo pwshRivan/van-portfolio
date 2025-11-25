@@ -19,10 +19,6 @@ const ContactSection = lazy(() =>
   import("@/components/sections/ContactSection")
 );
 
-/**
- * Portfolio Page
- * Main landing page with all portfolio sections
- */
 const Portfolio = () => {
   const [isLoading, setIsLoading] = useState(true);
 

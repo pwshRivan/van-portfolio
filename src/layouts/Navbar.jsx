@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Menu, X, Globe } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
@@ -8,9 +8,6 @@ import { ThemeToggle } from "@/components";
 import { NAV_LINKS } from "@/data/portfolioData";
 import vanPhoto from "@/assets/images/van.jpg";
 
-/**
- * Navigation Brand Component
- */
 function NavBrand({ onNavigate }) {
   const [showName, setShowName] = useState(false);
 
@@ -55,9 +52,6 @@ NavBrand.propTypes = {
   onNavigate: PropTypes.func.isRequired,
 };
 
-/**
- * Navigation Links Component
- */
 function NavLinks({ activeSection, onNavigate, className = "" }) {
   const { t } = useTranslation();
 
@@ -98,9 +92,6 @@ NavLinks.propTypes = {
   className: PropTypes.string,
 };
 
-/**
- * Navigation Actions Component
- */
 function NavActions() {
   const { language, toggleLanguage } = useLanguage();
 
@@ -135,9 +126,6 @@ function NavActions() {
   );
 }
 
-/**
- * Mobile Menu Component
- */
 function MobileMenu({ isOpen, activeSection, onNavigate, onClose }) {
   const { t } = useTranslation();
 
@@ -208,29 +196,15 @@ MobileMenu.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-/**
- * Main Navbar Component
- * Responsive navigation bar with smooth animations
- *
- * Features:
- * - Sticky header
- * - Active section detection
- * - Mobile menu
- * - Theme & language toggle
- * - Smooth scroll navigation
- */
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
-  const [lenisInstance, setLenisInstance] = useState(null);
+  const lenisInstanceRef = useRef(null);
 
-  // Get Lenis instance
+  // Get Lenis instance using ref to avoid re-renders
   useEffect(() => {
-    const lenis = window.lenis;
-    if (lenis) {
-      setLenisInstance(lenis);
-    }
+    lenisInstanceRef.current = window.lenis;
   }, []);
 
   // Track active section based on scroll position
@@ -302,28 +276,26 @@ export default function Navbar() {
   }, []);
 
   // Smooth scroll to section using Lenis
-  const scrollToSection = useCallback(
-    (sectionId) => {
-      const element = document.getElementById(sectionId);
-      if (!element) return;
+  const scrollToSection = useCallback((sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (!element) return;
 
-      // Use Lenis for smooth scroll if available
-      if (lenisInstance) {
-        lenisInstance.scrollTo(element, {
-          offset: -100,
-          duration: 1.5,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        });
-      } else {
-        // Fallback to native smooth scroll
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+    // Use Lenis for smooth scroll if available
+    const lenis = lenisInstanceRef.current;
+    if (lenis) {
+      lenis.scrollTo(element, {
+        offset: -100,
+        duration: 1.5,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      });
+    } else {
+      // Fallback to native smooth scroll
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
 
-      // Immediately set active section for instant feedback
-      setActiveSection(sectionId);
-    },
-    [lenisInstance]
-  );
+    // Immediately set active section for instant feedback
+    setActiveSection(sectionId);
+  }, []);
 
   // Handle navigation click
   const handleNavClick = useCallback(
@@ -354,7 +326,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 py-4 opacity-0 animate-fade-in">
+      <header className="fixed top-0 left-0 right-0 z-50 py-4">
         <div className="container mx-auto px-6">
           <div
             className={`relative flex items-center px-6 py-3 rounded-full transition-all duration-300 border ${

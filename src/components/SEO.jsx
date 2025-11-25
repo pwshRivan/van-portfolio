@@ -2,22 +2,6 @@ import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { SEO_DEFAULTS } from "@/data/portfolioData";
 
-/**
- * SEO Component for managing meta tags and structured data
- * Uses centralized constants for default values
- * Includes JSON-LD schema for better SEO
- * React 19 compatible - uses native DOM manipulation
- *
- * @param {Object} props - SEO properties
- * @param {string} props.title - Page title
- * @param {string} props.description - Page description
- * @param {string} props.keywords - SEO keywords
- * @param {string} props.author - Content author
- * @param {string} props.image - OG image URL
- * @param {string} props.url - Canonical URL
- * @param {string} props.type - OG type (website, article, etc.)
- * @param {Object} props.schema - Additional JSON-LD schema
- */
 const SEO = ({
   title = SEO_DEFAULTS.SITE_TITLE,
   description = SEO_DEFAULTS.SITE_DESCRIPTION,

@@ -1,17 +1,10 @@
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import { motion as Motion } from "motion/react";
-import { Code2, Wrench } from "lucide-react";
 import { useTheme } from "@/hooks";
 import { SKILL_CATEGORIES } from "@/data/portfolioData";
-import { SectionBackground } from "@/components";
 import { containerVariants, itemVariants, headerVariants } from "@/utils";
 
-/**
- * Skill Section
- * Displays a grid of technical skills with animations
- * Memoized for performance optimization
- */
 const SkillSection = memo(() => {
   const { t } = useTranslation();
   const { isDark } = useTheme();
@@ -151,7 +144,7 @@ const SkillSection = memo(() => {
           className="max-w-5xl mx-auto"
         >
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-6">
-            {allSkills.map((skill, index) => (
+            {allSkills.map((skill) => (
               <Motion.div
                 key={skill.name}
                 variants={itemVariants}

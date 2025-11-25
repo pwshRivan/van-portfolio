@@ -1,20 +1,11 @@
-import BalsamiqIcon from "@/assets/LogoTech/balsamiq.svg";
-import ewastepasImg from "@/assets/images/project/ewastepas.png";
-import babygrowthImg from "@/assets/images/project/babygrowth.png";
-import BootstrapIcon from "../assets/LogoTech/boostrap.svg";
-import CssIcon from "../assets/LogoTech/css.svg";
-import FigmaIcon from "../assets/LogoTech/figma.svg";
-import GcpIcon from "../assets/LogoTech/gcp.svg";
-import GitIcon from "../assets/LogoTech/git.svg";
-import HtmlIcon from "../assets/LogoTech/html.svg";
-import JavascriptIcon from "../assets/LogoTech/javascript.svg";
-import NextIcon from "../assets/LogoTech/nextjs2.svg";
-import NodeIcon from "../assets/LogoTech/nodejs.svg";
-import ReactIcon from "../assets/LogoTech/reactjs.svg";
-import TailwindIcon from "../assets/LogoTech/tailwindcss.svg";
-import TypescriptIcon from "../assets/LogoTech/typescript.svg";
-import LaravelIcon from "../assets/LogoTech/laravel.svg";
-import PhpIcon from "../assets/LogoTech/php.svg";
+import * as TechIcons from "@/assets/LogoTech";
+import * as ProjectImages from "@/assets/images/project";
+import { TechIcon } from "@/components/ui";
+
+// Helper function untuk create icon element
+const createIcon = (iconSrc, altText, className = "w-10 h-10") => (
+  <TechIcon src={iconSrc} alt={altText} className={className} />
+);
 
 export const NAV_LINKS = [
   { name: "nav.home", path: "#home" },
@@ -30,116 +21,28 @@ export const SKILL_CATEGORIES = {
   frontend: {
     title: "Frontend",
     skills: [
-      {
-        name: "HTML",
-        icon: (
-          <img
-            src={HtmlIcon}
-            alt="HTML"
-            width="40"
-            height="40"
-            loading="lazy"
-            decoding="async"
-            className="w-10 h-10"
-          />
-        ),
-      },
-      {
-        name: "CSS",
-        icon: (
-          <img
-            src={CssIcon}
-            alt="CSS"
-            width="40"
-            height="40"
-            loading="lazy"
-            decoding="async"
-            className="w-10 h-10"
-          />
-        ),
-      },
+      { name: "HTML", icon: createIcon(TechIcons.HtmlIcon, "HTML") },
+      { name: "CSS", icon: createIcon(TechIcons.CssIcon, "CSS") },
       {
         name: "JavaScript",
-        icon: (
-          <img
-            src={JavascriptIcon}
-            alt="JavaScript"
-            width="40"
-            height="40"
-            loading="lazy"
-            decoding="async"
-            className="w-10 h-10"
-          />
-        ),
+        icon: createIcon(TechIcons.JavascriptIcon, "JavaScript"),
       },
       {
         name: "Typescript",
-        icon: (
-          <img
-            src={TypescriptIcon}
-            alt="Typescript"
-            width="40"
-            height="40"
-            loading="lazy"
-            decoding="async"
-            className="w-10 h-10"
-          />
-        ),
+        icon: createIcon(TechIcons.TypescriptIcon, "Typescript"),
       },
-      {
-        name: "React",
-        icon: (
-          <img
-            src={ReactIcon}
-            alt="React"
-            width="40"
-            height="40"
-            loading="lazy"
-            decoding="async"
-            className="w-10 h-10"
-          />
-        ),
-      },
-      {
-        name: "Next.js",
-        icon: (
-          <img
-            src={NextIcon}
-            alt="Next.js"
-            width="40"
-            height="40"
-            loading="lazy"
-            decoding="async"
-            className="w-10 h-10"
-          />
-        ),
-      },
+      { name: "React", icon: createIcon(TechIcons.ReactIcon, "React") },
+      { name: "Next.js", icon: createIcon(TechIcons.NextIcon, "Next.js") },
       {
         name: "Tailwind",
-        icon: (
-          <img
-            src={TailwindIcon}
-            alt="Tailwind"
-            width="40"
-            height="40"
-            loading="lazy"
-            decoding="async"
-            className="w-10 h-10"
-          />
-        ),
+        icon: createIcon(TechIcons.TailwindIcon, "Tailwind"),
       },
       {
         name: "Bootstrap",
-        icon: (
-          <img
-            src={BootstrapIcon}
-            alt="Bootstrap"
-            width="40"
-            height="40"
-            loading="lazy"
-            decoding="async"
-            className="w-10 h-10 object-contain"
-          />
+        icon: createIcon(
+          TechIcons.BootstrapIcon,
+          "Bootstrap",
+          "w-10 h-10 object-contain"
         ),
       },
     ],
@@ -147,108 +50,20 @@ export const SKILL_CATEGORIES = {
   backend: {
     title: "Backend",
     skills: [
-      {
-        name: "Node.js",
-        icon: (
-          <img
-            src={NodeIcon}
-            alt="Node.js"
-            width="40"
-            height="40"
-            loading="lazy"
-            decoding="async"
-            className="w-10 h-10"
-          />
-        ),
-      },
-      {
-        name: "PHP",
-        icon: (
-          <img
-            src={PhpIcon}
-            alt="PHP"
-            width="40"
-            height="40"
-            loading="lazy"
-            decoding="async"
-            className="w-10 h-10"
-          />
-        ),
-      },
-      {
-        name: "Laravel",
-        icon: (
-          <img
-            src={LaravelIcon}
-            alt="Laravel"
-            width="40"
-            height="40"
-            loading="lazy"
-            decoding="async"
-            className="w-10 h-10"
-          />
-        ),
-      },
+      { name: "Node.js", icon: createIcon(TechIcons.NodeIcon, "Node.js") },
+      { name: "PHP", icon: createIcon(TechIcons.PhpIcon, "PHP") },
+      { name: "Laravel", icon: createIcon(TechIcons.LaravelIcon, "Laravel") },
     ],
   },
   tools: {
     title: "Tools & Others",
     skills: [
-      {
-        name: "Git",
-        icon: (
-          <img
-            src={GitIcon}
-            alt="Git"
-            width="40"
-            height="40"
-            loading="lazy"
-            decoding="async"
-            className="w-10 h-10"
-          />
-        ),
-      },
-      {
-        name: "GCP",
-        icon: (
-          <img
-            src={GcpIcon}
-            alt="GCP"
-            width="40"
-            height="40"
-            loading="lazy"
-            decoding="async"
-            className="w-10 h-10"
-          />
-        ),
-      },
-      {
-        name: "Figma",
-        icon: (
-          <img
-            src={FigmaIcon}
-            alt="Figma"
-            width="40"
-            height="40"
-            loading="lazy"
-            decoding="async"
-            className="w-10 h-10"
-          />
-        ),
-      },
+      { name: "Git", icon: createIcon(TechIcons.GitIcon, "Git") },
+      { name: "GCP", icon: createIcon(TechIcons.GcpIcon, "GCP") },
+      { name: "Figma", icon: createIcon(TechIcons.FigmaIcon, "Figma") },
       {
         name: "Balsamiq",
-        icon: (
-          <img
-            src={BalsamiqIcon}
-            alt="Balsamiq"
-            width="40"
-            height="40"
-            loading="lazy"
-            decoding="async"
-            className="w-10 h-10"
-          />
-        ),
+        icon: createIcon(TechIcons.BalsamiqIcon, "Balsamiq"),
       },
     ],
   },
@@ -267,7 +82,7 @@ export const PROJECTS_DATA = [
     title: "EWastepas",
     desc: "data.ewastepas_desc",
     tech: ["React", "Tailwind", "Maps API"],
-    image: ewastepasImg,
+    image: ProjectImages.ewastepasImg,
     link: "https://ewastepas.my.id",
     repo: "https://github.com/orgs/Ewastepas/repositories",
   },
@@ -276,7 +91,7 @@ export const PROJECTS_DATA = [
     title: "BabyGrowth",
     desc: "data.babygrowth_desc",
     tech: ["Node.js", "Hapi.js", "GCP", "Machine Learning"],
-    image: babygrowthImg,
+    image: ProjectImages.babygrowthImg,
     link: null,
     repo: "https://github.com/Baby-Growth/backend-babygrowth",
   },

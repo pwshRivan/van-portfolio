@@ -11,10 +11,6 @@ import {
 import { CONTACT } from "@/data/portfolioData";
 import { Instagram } from "lucide-react";
 
-/**
- * Contact Section
- * Displays contact information and social links
- */
 const ContactSection = () => {
   const { t } = useTranslation();
 

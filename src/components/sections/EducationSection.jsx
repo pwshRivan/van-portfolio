@@ -3,9 +3,6 @@ import { motion as Motion } from "motion/react";
 import { GraduationCap, Calendar, Award, BookOpen } from "lucide-react";
 import { EDUCATION_DATA } from "@/data/portfolioData";
 
-/**
- * Education Section with Compact Grid Design
- */
 const EducationSection = () => {
   const { t } = useTranslation();
 

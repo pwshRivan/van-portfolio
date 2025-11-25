@@ -2,10 +2,6 @@ import { ArrowRight } from "lucide-react";
 import { useTranslation, Trans } from "react-i18next";
 import { motion as Motion } from "motion/react";
 
-/**
- * Hero Section Component
- * Landing section with animated introduction
- */
 const HeroSection = () => {
   const { t } = useTranslation();
 

@@ -1,10 +1,6 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 
-/**
- * Custom hook for Lenis smooth scrolling
- * Initializes and manages Lenis instance
- */
 export const useLenis = () => {
   useEffect(() => {
     // Initialize Lenis

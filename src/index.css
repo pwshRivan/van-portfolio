@@ -63,19 +63,11 @@ body {
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
-
-  /* Font Rendering Fixes */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern" 1;
   font-kerning: normal;
-}
-
-/* Ensure all text elements have proper rendering */
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Selection */
@@ -87,29 +79,7 @@ body {
 /* Smooth Scroll */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px; /* Account for fixed navbar */
-}
-
-/* Performance Optimizations */
-section {
-  contain: layout style paint;
-  content-visibility: auto;
-}
-
-/* Will-change for animated elements */
-.will-change-transform {
-  will-change: transform;
-}
-
-.will-change-opacity {
-  will-change: opacity;
-}
-
-/* GPU acceleration for transforms */
-.gpu-accelerated {
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  perspective: 1000px;
+  scroll-padding-top: 80px;
 }
 
 /* Reduce motion for accessibility */
@@ -145,76 +115,16 @@ section {
   background-color: var(--color-text-secondary);
 }
 
-/* Utility Animations - Simple CSS instead of Framer Motion */
+/* Minimal animations for components that need it */
 @keyframes fade-in {
   from {
     opacity: 0;
-    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slide-in-left {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slide-in-right {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes spin-slow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
   }
 }
 
 .animate-fade-in {
-  animation: fade-in 0.6s ease-out forwards;
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.8s ease-out forwards;
-}
-
-.animate-slide-in-left {
-  animation: slide-in-left 0.6s ease-out forwards;
-}
-
-.animate-slide-in-right {
-  animation: slide-in-right 0.6s ease-out forwards;
-}
-
-.animate-spin-slow {
-  animation: spin-slow 20s linear infinite;
+  animation: fade-in 0.5s ease-out forwards;
 }

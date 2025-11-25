@@ -8,10 +8,6 @@ import vanPhoto from "@/assets/images/van.jpg";
 import cvEng from "@/assets/cv/cv-english.pdf";
 import cvIndo from "@/assets/cv/cv-indonesia.pdf";
 
-/**
- * About Hero Section
- * Displays personal information, photo, and CV download
- */
 const AboutHero = () => {
   const { t } = useTranslation();
   const { isIndonesian } = useLanguage();

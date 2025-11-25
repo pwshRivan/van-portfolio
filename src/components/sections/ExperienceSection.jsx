@@ -4,9 +4,6 @@ import { motion as Motion } from "motion/react";
 import { Briefcase, Calendar } from "lucide-react";
 import { EXPERIENCE_DATA } from "@/data/portfolioData";
 
-/**
- * Experience Section with Animated Timeline Design
- */
 const ExperienceSection = memo(() => {
   const { t } = useTranslation();
 

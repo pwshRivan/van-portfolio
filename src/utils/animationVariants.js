@@ -1,9 +1,3 @@
-/**
- * Animation Variants Constants
- * Reusable animation configurations for consistent motion across the app
- * Reduces code duplication and ensures unified animation behavior
- */
-
 // Container animations with staggered children
 export const containerVariants = {
   hidden: { opacity: 0 },

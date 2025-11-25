@@ -1,10 +1,6 @@
 import { Github, Linkedin, Mail } from "lucide-react";
 import { CONTACT } from "@/data/portfolioData";
 
-/**
- * Footer Component
- * Displays copyright and social links
- */
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 

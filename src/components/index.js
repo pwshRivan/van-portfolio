@@ -1,8 +1,3 @@
-/**
- * Reusable Components
- * Export all commonly used components for easy import
- */
-
 // UI Components
 export { default as Button } from "./ui/Button";
 export { default as ThemeToggle } from "./ui/ThemeToggle";
@@ -18,6 +13,3 @@ export { default as SectionBackground } from "./ui/SectionBackground";
 
 // For backward compatibility
 export { default as ScrollToTopRoute } from "./ui/ScrollToTop";
-
-// Sections - Removed to allow dynamic imports in Portfolio.jsx
-// If you need to import sections, import them directly from their files
