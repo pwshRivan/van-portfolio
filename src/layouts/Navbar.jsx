@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Menu, X, Globe } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
+import Lenis from "lenis";
 import { useLanguage } from "@/hooks";
 import { ThemeToggle } from "@/components";
 import { NAV_LINKS } from "@/data/portfolioData";
@@ -72,11 +73,14 @@ function NavLinks({ activeSection, onNavigate, className = "" }) {
           <button
             key={link.path}
             onClick={() => onNavigate(sectionId)}
-            className={`relative px-3 py-2 rounded-full text-xs font-semibold transition-all duration-200 ${
+            className={`relative px-3 py-2 rounded-full text-xs font-semibold transition-all duration-300 ease-in-out ${
               isActive
                 ? "bg-(--color-accent) text-(--color-bg-primary)"
                 : "text-(--color-text-secondary) hover:text-(--color-text-primary) hover:bg-(--color-overlay)"
             }`}
+            style={{
+              willChange: isActive ? "auto" : "background-color, color",
+            }}
             aria-label={`Navigate to ${t(link.name)}`}
             aria-current={isActive ? "page" : undefined}
           >
@@ -219,6 +223,15 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
+  const [lenisInstance, setLenisInstance] = useState(null);
+
+  // Get Lenis instance
+  useEffect(() => {
+    const lenis = window.lenis;
+    if (lenis) {
+      setLenisInstance(lenis);
+    }
+  }, []);
 
   // Track active section based on scroll position
   useEffect(() => {
@@ -239,18 +252,37 @@ export default function Navbar() {
       }
     };
 
-    // Use Intersection Observer for active section (more performant)
+    // Use Intersection Observer for active section
     const observerOptions = {
-      rootMargin: "-100px 0px -66%",
-      threshold: 0,
+      rootMargin: "-20% 0px -60% 0px",
+      threshold: [0, 0.25, 0.5],
     };
 
     const observer = new IntersectionObserver((entries) => {
+      // Get all intersecting sections
+      const intersectingSections = [];
+
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
+          intersectingSections.push({
+            id: entry.target.id,
+            top: entry.boundingClientRect.top,
+            ratio: entry.intersectionRatio,
+          });
         }
       });
+
+      // Sort by position (topmost visible section wins)
+      intersectingSections.sort((a, b) => a.top - b.top);
+
+      // Update active section
+      if (intersectingSections.length > 0) {
+        const newSection = intersectingSections[0].id;
+        setActiveSection((prev) => {
+          // Only update if different to prevent unnecessary re-renders
+          return prev !== newSection ? newSection : prev;
+        });
+      }
     }, observerOptions);
 
     // Observe all sections
@@ -269,13 +301,29 @@ export default function Navbar() {
     };
   }, []);
 
-  // Smooth scroll to section
-  const scrollToSection = useCallback((sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, []);
+  // Smooth scroll to section using Lenis
+  const scrollToSection = useCallback(
+    (sectionId) => {
+      const element = document.getElementById(sectionId);
+      if (!element) return;
+
+      // Use Lenis for smooth scroll if available
+      if (lenisInstance) {
+        lenisInstance.scrollTo(element, {
+          offset: -100,
+          duration: 1.5,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        });
+      } else {
+        // Fallback to native smooth scroll
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      // Immediately set active section for instant feedback
+      setActiveSection(sectionId);
+    },
+    [lenisInstance]
+  );
 
   // Handle navigation click
   const handleNavClick = useCallback(

@@ -27,7 +27,7 @@ const HeroSection = () => {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
+        ease: [0.25, 0.46, 0.45, 0.94],
       },
     },
   };
@@ -44,19 +44,22 @@ const HeroSection = () => {
   };
 
   const wordVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.5,
-        ease: "easeOut",
+        ease: [0.25, 0.46, 0.45, 0.94],
       },
     },
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center items-center text-center px-6 overflow-hidden pt-20 md:pt-0">
+    <section
+      id="home"
+      className="relative min-h-screen flex flex-col justify-center items-center text-center px-6 overflow-hidden pt-20 md:pt-0"
+    >
       {/* Content */}
       <Motion.div
         variants={containerVariants}

@@ -38,23 +38,17 @@ const Portfolio = () => {
         <div className="relative w-full overflow-hidden">
           {/* Hero Section */}
           <Suspense fallback={<SectionSkeleton />}>
-            <section id="home">
-              <HeroSection />
-            </section>
+            <HeroSection />
           </Suspense>
 
           {/* About Section */}
           <Suspense fallback={<SectionSkeleton />}>
-            <section id="about">
-              <AboutHero />
-            </section>
+            <AboutHero />
           </Suspense>
 
           {/* Skills Section */}
           <Suspense fallback={<SectionSkeleton />}>
-            <section id="skills">
-              <SkillSection />
-            </section>
+            <SkillSection />
           </Suspense>
 
           {/* Experience Section */}
@@ -69,16 +63,12 @@ const Portfolio = () => {
 
           {/* Projects Section */}
           <Suspense fallback={<SectionSkeleton />}>
-            <section id="projects">
-              <ProjectsSection />
-            </section>
+            <ProjectsSection />
           </Suspense>
 
           {/* Contact Section */}
           <Suspense fallback={<SectionSkeleton />}>
-            <section id="contact">
-              <ContactSection />
-            </section>
+            <ContactSection />
           </Suspense>
         </div>
       </MainLayout>

@@ -15,20 +15,20 @@ const EducationSection = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.5,
-        ease: "easeOut",
+        ease: [0.25, 0.46, 0.45, 0.94],
       },
     },
   };
@@ -38,7 +38,10 @@ const EducationSection = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: {
+        duration: 0.6,
+        ease: [0.25, 0.46, 0.45, 0.94],
+      },
     },
   };
 
@@ -150,6 +153,7 @@ const EducationSection = () => {
               key={edu.id}
               variants={itemVariants}
               className="group relative rounded-2xl p-8 bg-(--color-bg-primary) border-2 border-(--color-border) hover:border-(--color-accent) transition-all duration-300"
+              style={{ willChange: "transform, opacity" }}
             >
               {/* Icon */}
               <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 bg-(--color-accent) group-hover:scale-110 transition-transform">

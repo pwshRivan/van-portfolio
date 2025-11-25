@@ -16,42 +16,33 @@ const ExperienceSection = memo(() => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1,
+        staggerChildren: 0.2,
+        delayChildren: 0.2,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, x: -30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
-      x: 0,
+      y: 0,
       transition: {
-        duration: 0.4,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const itemVariantsRight = {
-    hidden: { opacity: 0, x: 30 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.4,
-        ease: "easeOut",
+        duration: 0.5,
+        ease: [0.25, 0.46, 0.45, 0.94],
       },
     },
   };
 
   const headerVariants = {
-    hidden: { opacity: 0, y: -30 },
+    hidden: { opacity: 0, y: -20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.7, ease: "easeOut" },
+      transition: {
+        duration: 0.6,
+        ease: [0.25, 0.46, 0.45, 0.94],
+      },
     },
   };
 
@@ -60,8 +51,8 @@ const ExperienceSection = memo(() => {
     visible: {
       scaleY: 1,
       transition: {
-        duration: 0.8,
-        ease: "easeOut",
+        duration: 1,
+        ease: [0.25, 0.46, 0.45, 0.94],
       },
     },
   };
@@ -186,20 +177,20 @@ const ExperienceSection = memo(() => {
               return (
                 <Motion.div
                   key={exp.id}
-                  variants={isEven ? itemVariants : itemVariantsRight}
+                  variants={itemVariants}
                   className={`relative flex items-center ${
                     isEven ? "md:flex-row" : "md:flex-row-reverse"
                   }`}
                 >
                   {/* Timeline Node */}
                   <Motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
+                    initial={{ scale: 0, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true, amount: 0.5 }}
                     transition={{
-                      delay: 0.2 * idx,
+                      delay: idx * 0.1,
                       duration: 0.4,
-                      ease: "easeOut",
+                      ease: [0.25, 0.46, 0.45, 0.94],
                     }}
                     className="absolute left-8 md:left-1/2 w-5 h-5 rounded-full bg-(--color-accent) border-4 border-(--color-bg-primary) md:-translate-x-1/2 z-10"
                   />
@@ -214,8 +205,8 @@ const ExperienceSection = memo(() => {
                     }`}
                   >
                     <Motion.div
-                      variants={isEven ? itemVariants : itemVariantsRight}
                       className="group rounded-2xl p-6 md:p-8 bg-(--color-bg-secondary) border border-(--color-border) hover:border-(--color-accent) transition-all duration-300"
+                      style={{ willChange: "transform, opacity" }}
                     >
                       {/* Period Badge */}
                       <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-4 bg-(--color-accent) text-(--color-bg-primary)">

@@ -31,8 +31,8 @@ const SkillSection = memo(() => {
 
   return (
     <section
-      style={{ backgroundColor: "var(--color-bg-primary)" }}
-      className="py-16 md:py-24 relative overflow-hidden"
+      id="skills"
+      className="py-16 md:py-24 relative overflow-hidden bg-(--color-bg-primary)"
     >
       {/* Background Decorations */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
