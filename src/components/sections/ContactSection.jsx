@@ -63,7 +63,7 @@ const ContactSection = () => {
       label: t("contact.info.location"),
       value: "Bandung, Indonesia",
       href: `https://maps.google.com/?q=${encodeURIComponent(
-        "Jl. Rajawali Timur No.211/79 Rt.08 Rw.08 Kel Dungus Cariang Kec. Andir, Bandung"
+        "Bandung, Indonesia"
       )}`,
     },
     {
