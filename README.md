@@ -1,6 +1,6 @@
 <div align="center">
 
-# ✨ M Rivan Sahronie
+# Muhamad Rivan Sahronie
 
 **Full Stack Developer • UI/UX Enthusiast • Cloud Computing**
 
