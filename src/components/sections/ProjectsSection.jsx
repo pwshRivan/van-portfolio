@@ -60,7 +60,7 @@ const ProjectsSection = memo(() => {
 
   useGSAP(
     () => {
-      // Header Reveal
+      // Animasi Header
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".projects-header",
@@ -89,7 +89,7 @@ const ProjectsSection = memo(() => {
         "-=0.8"
       );
 
-      // Filters Animation
+      // Animasi Filter
       gsap.fromTo(
         ".projects-filters",
         { y: 30, opacity: 0 },
@@ -105,7 +105,7 @@ const ProjectsSection = memo(() => {
         }
       );
 
-      // Carousel Animation
+      // Animasi Carousel
       gsap.fromTo(
         ".projects-carousel",
         { y: 50, opacity: 0 },

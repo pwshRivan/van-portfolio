@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { Menu, X, Globe } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import Lenis from "lenis";
 import { useLanguage } from "@/hooks";
 import { ThemeToggle } from "@/components";
 import { navLinks } from "@/data";
@@ -200,12 +199,12 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const lenisInstanceRef = useRef(null);
 
-  // Get Lenis instance using ref to avoid re-renders
+  // Mengambil instance Lenis menggunakan ref untuk menghindari re-render yang tidak perlu
   useEffect(() => {
     lenisInstanceRef.current = window.lenis;
   }, []);
 
-  // Track active section
+  // Memantau section yang aktif saat scroll
   useEffect(() => {
     let ticking = false;
     let lastScrollY = 0;
@@ -215,8 +214,38 @@ export default function Navbar() {
 
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          // Check if scrolled past threshold
+          // Cek apakah sudah scroll melewati threshold tertentu
           setScrolled(lastScrollY > 50);
+
+          // Menentukan section aktif berdasarkan tinggi yang terlihat di viewport
+          const sections = navLinks.map((link) => link.path.substring(1));
+          let maxVisibleHeight = 0;
+          let bestSection = null;
+
+          sections.forEach((sectionId) => {
+            const element = document.getElementById(sectionId);
+            if (element) {
+              const rect = element.getBoundingClientRect();
+              const viewportHeight = window.innerHeight;
+              
+              // Hitung tinggi elemen yang terlihat di layar
+              const visibleHeight = Math.max(
+                0,
+                Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0)
+              );
+
+              // Update jika section ini lebih mendominasi tampilan
+              if (visibleHeight > maxVisibleHeight) {
+                maxVisibleHeight = visibleHeight;
+                bestSection = sectionId;
+              }
+            }
+          });
+
+          if (bestSection && bestSection !== activeSection) {
+             setActiveSection(bestSection);
+          }
+
           ticking = false;
         });
 
@@ -224,58 +253,28 @@ export default function Navbar() {
       }
     };
 
-    // Observer for active section
-    const observerOptions = {
-      rootMargin: "-20% 0px -60% 0px",
-      threshold: [0, 0.25, 0.5],
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      // Get all intersecting sections
-      const intersectingSections = [];
-
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          intersectingSections.push({
-            id: entry.target.id,
-            top: entry.boundingClientRect.top,
-            ratio: entry.intersectionRatio,
-          });
-        }
-      });
-
-      // Sort by position
-      intersectingSections.sort((a, b) => a.top - b.top);
-
-      // Update active section
-      if (intersectingSections.length > 0) {
-        const newSection = intersectingSections[0].id;
-        setActiveSection(newSection);
-      }
-    }, observerOptions);
-
-    // Observe all sections
-    const sections = navLinks.map((link) => link.path.substring(1));
-    sections.forEach((sectionId) => {
-      const element = document.getElementById(sectionId);
-      if (element) observer.observe(element);
-    });
-
     window.addEventListener("scroll", handleScroll, { passive: true });
+    // Dengarkan event scroll dari Lenis jika tersedia
+    if (window.lenis) {
+      window.lenis.on('scroll', handleScroll);
+    }
+    
     handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      observer.disconnect();
+      if (window.lenis) {
+        window.lenis.off('scroll', handleScroll);
+      }
     };
-  }, [setActiveSection]);
+  }, [activeSection, setActiveSection]);
 
-  // Smooth scroll
+  // Fungsi smooth scroll ke section tujuan
   const scrollToSection = useCallback((sectionId) => {
     const element = document.getElementById(sectionId);
     if (!element) return;
 
-    // Use Lenis for smooth scroll if available
+    // Gunakan Lenis untuk smooth scroll jika tersedia
     const lenis = lenisInstanceRef.current;
     if (lenis) {
       lenis.scrollTo(element, {
@@ -284,15 +283,15 @@ export default function Navbar() {
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       });
     } else {
-      // Fallback to native smooth scroll
+      // Fallback ke native smooth scroll
       element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
-    // Immediately set active section for instant feedback
+    // Set active section segera untuk feedback instan
     setActiveSection(sectionId);
   }, [setActiveSection]);
 
-  // Handle navigation click
+  // Handle klik navigasi
   const handleNavClick = useCallback(
     (sectionId) => {
       scrollToSection(sectionId);
@@ -301,17 +300,17 @@ export default function Navbar() {
     [scrollToSection]
   );
 
-  // Toggle mobile menu
+  // Toggle menu mobile
   const toggleMobileMenu = useCallback(() => {
     setMobileMenuOpen((prev) => !prev);
   }, []);
 
-  // Close mobile menu
+  // Tutup menu mobile
   const closeMobileMenu = useCallback(() => {
     setMobileMenuOpen(false);
   }, []);
 
-  // Prevent body scroll when mobile menu is open
+  // Mencegah scroll pada body saat menu mobile terbuka
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? "hidden" : "unset";
     return () => {

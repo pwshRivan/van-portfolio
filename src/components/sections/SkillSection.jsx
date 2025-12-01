@@ -15,14 +15,14 @@ const SkillSection = memo(() => {
   const { isDark } = useTheme();
   const containerRef = useRef(null);
 
-  // Combine all skills from all categories
+  // Gabungkan semua skill dari semua kategori
   const allSkills = [
     ...skillCategories.frontend.skills,
     ...skillCategories.backend.skills,
     ...skillCategories.tools.skills,
   ];
 
-  // Function to check if logo needs inversion for dark mode
+  // Fungsi untuk mengecek apakah logo perlu di-invert pada mode gelap
   const needsInversion = (skillName) => {
     const darkLogos = ["Next.js", "Balsamiq"];
     return darkLogos.includes(skillName) && isDark;
@@ -30,7 +30,7 @@ const SkillSection = memo(() => {
 
   useGSAP(
     () => {
-      // Header Reveal
+      // Animasi Header
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".skill-header",
@@ -39,12 +39,12 @@ const SkillSection = memo(() => {
         defaults: { ease: "power4.out", duration: 1.2 }
       });
 
-      // Animations
+      // Animasi elemen-elemen
       tl.fromTo(".skill-badge", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 });
       tl.fromTo(".skill-title", { y: 50, opacity: 0 }, { y: 0, opacity: 1 }, "-=0.6");
       tl.fromTo(".skill-subtitle", { y: 20, opacity: 0 }, { y: 0, opacity: 1 }, "-=0.8");
 
-      // Grid Animation
+      // Animasi Grid
       gsap.fromTo(
         ".skill-item",
         { y: 30, opacity: 0, scale: 0.9 },

@@ -15,7 +15,7 @@ const EducationSection = () => {
 
   useGSAP(
     () => {
-      // Header Reveal
+      // Animasi Header
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".edu-header",
@@ -24,12 +24,12 @@ const EducationSection = () => {
         defaults: { ease: "power4.out", duration: 1.2 }
       });
 
-      // Animations
+      // Animasi elemen-elemen
       tl.fromTo(".edu-badge", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 });
       tl.fromTo(".edu-title", { y: 50, opacity: 0 }, { y: 0, opacity: 1 }, "-=0.6");
       tl.fromTo(".edu-subtitle", { y: 20, opacity: 0 }, { y: 0, opacity: 1 }, "-=0.8");
 
-      // Grid Animation
+      // Animasi Grid
       gsap.fromTo(
         ".edu-item",
         { y: 30, opacity: 0, scale: 0.95 },

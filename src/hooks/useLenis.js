@@ -5,10 +5,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export const useLenis = () => {
   useEffect(() => {
-    // Register ScrollTrigger
+    // Registrasi ScrollTrigger
     gsap.registerPlugin(ScrollTrigger);
 
-    // Initialize Lenis
+    // Inisialisasi Lenis
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -21,21 +21,21 @@ export const useLenis = () => {
       infinite: false,
     });
 
-    // Expose to window for other components
+    // Expose ke window agar bisa diakses komponen lain
     window.lenis = lenis;
 
-    // Sync Lenis and ScrollTrigger
+    // Sinkronisasi Lenis dan ScrollTrigger
     lenis.on("scroll", ScrollTrigger.update);
 
-    // Use GSAP ticker for Lenis raf to ensure sync
+    // Gunakan GSAP ticker untuk Lenis raf agar sinkron
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
     });
 
-    // Disable lag smoothing for smoother scroll
+    // Nonaktifkan lag smoothing untuk scroll yang lebih halus
     gsap.ticker.lagSmoothing(0);
 
-    // Cleanup
+    // Bersihkan saat unmount
     return () => {
       gsap.ticker.remove((time) => {
         lenis.raf(time * 1000);

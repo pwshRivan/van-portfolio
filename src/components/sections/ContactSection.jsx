@@ -72,7 +72,7 @@ const ContactSection = () => {
 
   useGSAP(
     () => {
-      // Header Reveal
+      // Animasi Header
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".contact-header",
@@ -81,12 +81,12 @@ const ContactSection = () => {
         defaults: { ease: "power4.out", duration: 1.2 }
       });
 
-      // Animations
+      // Animasi elemen-elemen
       tl.fromTo(".contact-badge", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 });
       tl.fromTo(".contact-title", { y: 50, opacity: 0 }, { y: 0, opacity: 1 }, "-=0.6");
       tl.fromTo(".contact-subtitle", { y: 20, opacity: 0 }, { y: 0, opacity: 1 }, "-=0.8");
 
-      // Grid Animation
+      // Animasi Grid
       gsap.fromTo(
         ".contact-item",
         { y: 30, opacity: 0, scale: 0.95 },

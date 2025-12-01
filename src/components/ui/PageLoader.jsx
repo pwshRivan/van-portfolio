@@ -5,7 +5,7 @@ import { useGSAP } from "@gsap/react";
 import vanLogo from "@/assets/van.svg";
 
 /**
- * Full Page Loader Component
+ * Komponen Loader Halaman Penuh
  */
 const PageLoader = ({ onLoadComplete }) => {
   const [progress, setProgress] = useState(0);
@@ -44,7 +44,7 @@ const PageLoader = ({ onLoadComplete }) => {
     () => {
       const tl = gsap.timeline();
 
-      // Reveal Animation
+      // Animasi Muncul
       tl.from(".loader-spotlight", {
         scale: 0.5,
         opacity: 0,

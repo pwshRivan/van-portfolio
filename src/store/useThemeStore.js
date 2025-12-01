@@ -40,7 +40,7 @@ const useThemeStore = create(
   )
 );
 
-// Initialize theme on load
+// Inisialisasi tema saat load
 if (typeof window !== "undefined") {
   const initialTheme = useThemeStore.getState().theme;
   document.documentElement.setAttribute("data-theme", initialTheme);

@@ -15,13 +15,13 @@ const HeroSection = () => {
     () => {
       const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
 
-      // Animations
+      // Animasi elemen-elemen hero
       tl.fromTo(".hero-badge", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, delay: 0.2 });
       tl.fromTo(".hero-title-line", { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, stagger: 0.15 }, "-=0.8");
       tl.fromTo(".hero-subtitle", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1 }, "-=0.8");
       tl.fromTo(".hero-buttons", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1 }, "-=0.8");
 
-      // Background Orbit Animation
+      // Animasi Orbit Latar Belakang
       gsap.to(".orbit-system", {
         rotation: 360,
         duration: 40,
@@ -36,14 +36,14 @@ const HeroSection = () => {
         ease: "linear",
       });
 
-      // Scroll Indicator
+      // Indikator Scroll
       gsap.fromTo(
         ".scroll-indicator",
         { y: -20, opacity: 0 },
         { y: 0, opacity: 1, duration: 1, delay: 2 }
       );
 
-      // Mouse Wheel Animation
+      // Animasi Roda Mouse
       gsap.fromTo(
         ".mouse-wheel",
         { y: 0, opacity: 1 },

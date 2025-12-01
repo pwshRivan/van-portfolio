@@ -7,7 +7,7 @@ const useLanguageStore = create(
       // State
       language: "id",
 
-      // Actions
+      // Aksi
       setLanguage: (language) => set({ language }),
 
       toggleLanguage: () => {

@@ -15,7 +15,7 @@ const ExperienceSection = memo(() => {
 
   useGSAP(
     () => {
-      // Header Reveal
+      // Animasi Header
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".exp-header",
@@ -24,12 +24,12 @@ const ExperienceSection = memo(() => {
         defaults: { ease: "power4.out", duration: 1.2 }
       });
 
-      // Animations
+      // Animasi elemen-elemen
       tl.fromTo(".exp-badge", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 });
       tl.fromTo(".exp-title", { y: 50, opacity: 0 }, { y: 0, opacity: 1 }, "-=0.6");
       tl.fromTo(".exp-subtitle", { y: 20, opacity: 0 }, { y: 0, opacity: 1 }, "-=0.8");
 
-      // Timeline Animation
+      // Animasi Timeline
       const items = gsap.utils.toArray(".timeline-item");
       items.forEach((item, i) => {
         const content = item.querySelector(".timeline-content");
@@ -42,7 +42,7 @@ const ExperienceSection = memo(() => {
           }
         });
 
-        // Node pop in
+        // Animasi Node muncul
         if (node) {
            itemTl.fromTo(node, 
              { scale: 0, opacity: 0 },
@@ -50,7 +50,7 @@ const ExperienceSection = memo(() => {
            );
         }
 
-        // Content slide in
+        // Animasi Konten masuk
         if (content) {
           itemTl.fromTo(content,
             { y: 30, opacity: 0 },

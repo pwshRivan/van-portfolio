@@ -14,7 +14,7 @@ const ProjectCard = memo(({ project, onUnavailableClick }) => {
         padding="none"
         className="h-full flex flex-col min-h-[450px]"
       >
-        {/* Image */}
+        {/* Gambar */}
         <div className="relative h-56 overflow-hidden bg-(--color-bg-tertiary) shadow-sm rounded-t-[14px]">
           <LazyImage
             src={project.image}
@@ -22,7 +22,7 @@ const ProjectCard = memo(({ project, onUnavailableClick }) => {
             className="w-full h-full"
           />
 
-          {/* Overlay on Hover */}
+          {/* Overlay saat Hover */}
           <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-4">
             {project.link ? (
               <Button
@@ -66,7 +66,7 @@ const ProjectCard = memo(({ project, onUnavailableClick }) => {
           </div>
         </div>
 
-        {/* Content */}
+        {/* Konten */}
         <div className="p-6 flex-1 flex flex-col">
           <h3 className="text-xl md:text-2xl font-bold mb-3 transition-colors text-(--color-text-primary)">
             {project.title}
@@ -76,7 +76,7 @@ const ProjectCard = memo(({ project, onUnavailableClick }) => {
             {t(project.desc)}
           </p>
 
-          {/* Tech Stack */}
+          {/* Stack Teknologi */}
           <div className="flex flex-wrap gap-2 mt-auto">
             {project.tech.map((tech) => (
               <Badge

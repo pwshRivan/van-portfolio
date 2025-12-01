@@ -21,7 +21,7 @@ const AboutHero = () => {
 
   useGSAP(
     () => {
-      // Content Animation
+      // Animasi Konten
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".about-content",
@@ -30,12 +30,12 @@ const AboutHero = () => {
         defaults: { ease: "power4.out", duration: 1.2 }
       });
 
-      // Animations
+      // Animasi elemen-elemen
       tl.fromTo(".about-badge", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 });
       tl.fromTo(".about-title-line", { y: 100, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.1 }, "-=0.6");
       tl.fromTo(".about-text", { y: 30, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.1 }, "-=0.8");
 
-      // Photo Animation
+      // Animasi Foto
       gsap.fromTo(
         ".about-photo-container",
         { y: 50, opacity: 0, scale: 0.95 },
