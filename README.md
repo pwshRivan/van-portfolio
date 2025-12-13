@@ -1,12 +1,8 @@
-<div align="center">
-
 # Muhamad Rivan Sahronie
 
-**Web Developer • UI/UX Enthusiast**
+## Web Developer
 
-<p align="center">
-  <i>"Everything you can imagine is real."</i>
-</p>
+> "Everything you can imagine is real."
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-Live-00C7B7?style=for-the-badge&logo=vercel)](https://rivan.me)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/rivaannnn)
@@ -16,6 +12,4 @@
 
 ---
 
-<sub>Built with ❤️ by M Rivan Sahronie • © 2025</sub>
-
-</div>
+Built with ❤️ by M Rivan Sahronie • © 2025
