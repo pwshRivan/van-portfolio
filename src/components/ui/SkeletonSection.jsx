@@ -1,6 +1,3 @@
-/**
- * Section Skeleton Loader
- */
 const SectionSkeleton = () => {
   return (
     <div className="w-full py-20 px-4 animate-pulse">

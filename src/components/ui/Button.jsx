@@ -3,33 +3,30 @@ import { cva } from "class-variance-authority";
 import PropTypes from "prop-types";
 import { cn } from "@/utils";
 
-/**
- * Button Component (Shadcn UI v2 Style)
- */
-
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         primary:
-          "bg-(--color-accent) text-(--color-bg-primary) hover:opacity-90",
+          "bg-(--color-accent) text-(--color-bg-primary) hover:opacity-90 shadow-md hover:shadow-lg hover:-translate-y-0.5",
         secondary:
-          "bg-(--color-bg-secondary) text-(--color-text-primary) hover:bg-(--color-bg-tertiary)",
+          "bg-(--color-bg-secondary) text-(--color-text-primary) hover:bg-(--color-bg-tertiary) border border-(--color-border)",
         outline:
-          "border-2 border-(--color-border) bg-transparent text-(--color-text-primary) hover:bg-(--color-surface)",
-        ghost: "bg-transparent hover:bg-(--color-surface)",
+          "border-2 border-(--color-border) bg-transparent text-(--color-text-primary) hover:bg-(--color-surface) hover:text-(--color-text-primary)",
+        ghost:
+          "bg-transparent text-(--color-text-primary) hover:bg-(--color-surface)",
         gradient:
-          "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white",
-        danger: "bg-red-600 text-white hover:bg-red-700",
-        success: "bg-emerald-600 text-white hover:bg-emerald-700",
+          "bg-linear-to-r from-(--color-accent) to-purple-600 text-white shadow-lg",
+        danger: "bg-red-500 text-white hover:bg-red-600",
+        success: "bg-emerald-500 text-white hover:bg-emerald-600",
       },
       size: {
         sm: "h-9 px-4 text-sm",
         default: "h-11 px-6 text-base",
         lg: "h-14 px-8 text-lg",
         icon: "h-10 w-10",
-        auto: "h-auto px-6 py-3", 
+        auto: "h-auto px-6 py-3",
       },
     },
     defaultVariants: {

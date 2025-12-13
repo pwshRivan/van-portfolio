@@ -4,14 +4,12 @@ import MainLayout from "@/layouts/MainLayout";
 
 // Lazy load sections
 const HeroSection = lazy(() => import("@/components/sections/HeroSection"));
-const AboutHero = lazy(() => import("@/components/sections/AboutHero"));
+const AboutSection = lazy(() => import("@/components/sections/AboutSection"));
 const SkillSection = lazy(() => import("@/components/sections/SkillSection"));
 const ExperienceSection = lazy(() =>
   import("@/components/sections/ExperienceSection")
 );
-const EducationSection = lazy(() =>
-  import("@/components/sections/EducationSection")
-);
+
 const ProjectsSection = lazy(() =>
   import("@/components/sections/ProjectsSection")
 );
@@ -39,7 +37,7 @@ const Portfolio = () => {
 
           {/* About */}
           <Suspense fallback={<SectionSkeleton />}>
-            <AboutHero />
+            <AboutSection />
           </Suspense>
 
           {/* Skills */}
@@ -50,11 +48,6 @@ const Portfolio = () => {
           {/* Experience */}
           <Suspense fallback={<SectionSkeleton />}>
             <ExperienceSection />
-          </Suspense>
-
-          {/* Education */}
-          <Suspense fallback={<SectionSkeleton />}>
-            <EducationSection />
           </Suspense>
 
           {/* Projects */}

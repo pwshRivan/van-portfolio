@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
 import { ArrowUp } from "lucide-react";
 
-/**
- * ScrollToTop Component
- * Simple button to scroll back to top
- */
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
 

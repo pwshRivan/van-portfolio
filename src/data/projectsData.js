@@ -9,6 +9,7 @@ export const projectsData = [
     image: ProjectImages.ewastepasImg,
     link: "https://ewastepas.my.id",
     repo: "https://github.com/orgs/Ewastepas/repositories",
+    category: "Frontend",
   },
   {
     id: 2,
@@ -18,5 +19,6 @@ export const projectsData = [
     image: ProjectImages.babygrowthImg,
     link: null,
     repo: "https://github.com/Baby-Growth/backend-babygrowth",
+    category: "Backend",
   },
 ];

@@ -12,11 +12,14 @@
   },
   "hero": {
     "available": "Available for new projects",
-    "title_1": "Building digital",
-    "title_highlight": "experiences",
-    "title_2": "that matter.",
-    "intro": "I'm <1>M Rivan Sahronie</1>, a Web Developer & UI/UX Designer passionate about contributing to the digital world through creative and innovative solutions.",
-    "view_work": "Tell me more"
+    "title_1": "Hello, I'm",
+    "title_highlight": "Muhammad Rivan Sahronie",
+    "title_2": "Web Developer",
+    "view_work": "My Work",
+    "subtitle": "I love building interactive web experiences.",
+    "description": "I'm a Web Developer passionate about building functional and performant websites. I enjoy learning new skills and implementing them in real life!",
+    "cta_primary": "Get In Touch",
+    "cta_secondary": "See Projects"
   },
   "skills": {
     "badge": "Technologies",

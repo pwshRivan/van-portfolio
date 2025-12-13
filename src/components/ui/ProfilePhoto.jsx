@@ -3,9 +3,6 @@ import PropTypes from "prop-types";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-/**
- * ProfilePhoto Component
- */
 const ProfilePhoto = ({ src, alt, className = "" }) => {
   const containerRef = useRef(null);
 
@@ -23,7 +20,10 @@ const ProfilePhoto = ({ src, alt, className = "" }) => {
   );
 
   return (
-    <div ref={containerRef} className={`relative aspect-3/4 max-w-sm mx-auto ${className}`}>
+    <div
+      ref={containerRef}
+      className={`relative aspect-3/4 max-w-sm mx-auto ${className}`}
+    >
       {/* Animation Container */}
       <div className="profile-container relative w-full h-full">
         {/* Photo */}

@@ -1,12 +1,7 @@
 import * as React from "react";
 import { cva } from "class-variance-authority";
 import PropTypes from "prop-types";
-import { ExternalLink, Github } from "lucide-react";
 import { cn } from "@/utils";
-
-/**
- * Card Component Variants
- */
 
 const cardVariants = cva(
   "rounded-xl border bg-card text-card-foreground transition-all duration-300",
@@ -102,88 +97,6 @@ const CardFooter = React.forwardRef(({ className, ...props }, ref) => (
 ));
 CardFooter.displayName = "CardFooter";
 
-/**
- * ProjectCard Component
- */
-const ProjectCard = React.memo(({ project, index, t, className, ...props }) => {
-  return (
-    <div
-      className={cn("group relative opacity-0 animate-fade-in", className)}
-      style={{ animationDelay: `${index * 0.1}s` }}
-      {...props}
-    >
-      <Card variant="project" padding="none">
-        {/* Image */}
-        <div className="relative h-56 overflow-hidden bg-(--color-bg-tertiary)">
-          <img
-            src={project.image}
-            alt={project.title}
-            loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-          />
-
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-4">
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 rounded-full transition-all duration-200 bg-(--color-accent) text-(--color-bg-primary) hover:scale-110 active:scale-95"
-            >
-              <ExternalLink size={20} />
-            </a>
-            <a
-              href="#"
-              className="p-3 rounded-full transition-all duration-200 bg-(--color-accent) text-(--color-bg-primary) hover:scale-110 active:scale-95"
-            >
-              <Github size={20} />
-            </a>
-          </div>
-        </div>
-
-        {/* Content */}
-        <div className="p-6">
-          <h3 className="text-xl md:text-2xl font-bold mb-3 transition-colors text-(--color-text-primary)">
-            {project.title}
-          </h3>
-
-          <p className="mb-4 leading-relaxed text-(--color-text-secondary) overflow-hidden text-ellipsis line-clamp-3">
-            {t(project.desc)}
-          </p>
-
-          {/* Tech Stack */}
-          <div className="flex flex-wrap gap-2">
-            {project.tech.map((tech) => (
-              <span
-                key={tech}
-                className="px-3 py-1 text-xs font-medium rounded-full transition-all duration-200 cursor-default bg-(--color-overlay) text-(--color-text-secondary) hover:bg-(--color-overlay-hover) hover:scale-105"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        </div>
-      </Card>
-    </div>
-  );
-});
-
-ProjectCard.displayName = "ProjectCard";
-
-ProjectCard.propTypes = {
-  project: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    desc: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
-    tech: PropTypes.arrayOf(PropTypes.string).isRequired,
-  }).isRequired,
-  index: PropTypes.number.isRequired,
-  t: PropTypes.func.isRequired,
-  className: PropTypes.string,
-};
-
 // PropTypes for base components
 Card.propTypes = {
   className: PropTypes.string,
@@ -231,5 +144,4 @@ export {
   CardTitle,
   CardDescription,
   CardContent,
-  ProjectCard,
 };

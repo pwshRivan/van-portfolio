@@ -30,7 +30,7 @@ const Footer = () => {
           <div className="text-sm text-(--color-text-secondary)">
             © {currentYear}{" "}
             <span className="font-medium text-(--color-text-primary)">
-              M Rivan Sahronie
+              {contactData.name}
             </span>
             . All rights reserved.
           </div>

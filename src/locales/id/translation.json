@@ -12,11 +12,14 @@
   },
   "hero": {
     "available": "Siap untuk proyek baru",
-    "title_1": "Membangun",
-    "title_highlight": "pengalaman digital",
-    "title_2": "yang bermakna.",
-    "intro": "Halo, saya <1>M Rivan Sahronie</1>, seorang Web Developer & UI/UX Designer yang bersemangat untuk berkontribusi pada dunia digital melalui solusi kreatif dan inovatif.",
-    "view_work": "Ceritakan lebih lanjut"
+    "title_1": "Halo, saya",
+    "title_highlight": "Muhammad Rivan Sahronie",
+    "title_2": "Web Developer",
+    "view_work": "Lihat Karya",
+    "subtitle": "Saya senang membangun pengalaman web yang interaktif.",
+    "description": "Saya adalah Web Developer yang bersemangat dalam membangun situs web yang fungsional dan berkinerja tinggi. Saya senang mempelajari keterampilan baru dan menerapkannya dalam kehidupan nyata!",
+    "cta_primary": "Hubungi Saya",
+    "cta_secondary": "Lihat Proyek"
   },
   "skills": {
     "badge": "Teknologi",

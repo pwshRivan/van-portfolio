@@ -1,19 +1,24 @@
 import { useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
-import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import vanLogo from "@/assets/van.svg";
+import { gsap } from "@/lib/gsap";
+import ppVan from "@/assets/images/ppvan.jpg";
+import { contactData } from "@/data";
 
-/**
- * Komponen Loader Halaman Penuh
- */
 const PageLoader = ({ onLoadComplete }) => {
   const [progress, setProgress] = useState(0);
   const containerRef = useRef(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
+  // Constants for circular progress
+  const radius = 60;
+  const stroke = 4;
+  const normalizedRadius = radius - stroke * 2;
+  const circumference = normalizedRadius * 2 * Math.PI;
+  const strokeDashoffset = circumference - (progress / 100) * circumference;
+
   useEffect(() => {
-    const duration = 2000;
+    const duration = 2500;
     const interval = 20;
     const steps = duration / interval;
     const increment = 100 / steps;
@@ -31,7 +36,7 @@ const PageLoader = ({ onLoadComplete }) => {
 
     const timer = setTimeout(() => {
       setIsLoaded(true);
-    }, duration + 800);
+    }, duration + 500);
 
     return () => {
       clearInterval(progressInterval);
@@ -39,43 +44,38 @@ const PageLoader = ({ onLoadComplete }) => {
     };
   }, []);
 
-
   useGSAP(
     () => {
       const tl = gsap.timeline();
 
-      // Animasi Muncul
-      tl.from(".loader-spotlight", {
-        scale: 0.5,
-        opacity: 0,
-        duration: 1.5,
-        ease: "power2.out",
-      })
-      .from(".loader-logo", {
-        y: 20,
+      // Entrance
+      tl.from(".loader-content", {
+        scale: 0.8,
         opacity: 0,
         duration: 1,
         ease: "power3.out",
-      }, "-=1")
-      .from(".loader-name", {
-        y: 10,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-      }, "-=0.8")
-      .from(".loader-bar-container", {
-        scaleX: 0,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-      }, "-=0.6")
-      .from(".loader-percent", {
-        y: 5,
-        opacity: 0,
-        duration: 0.5,
-        ease: "power3.out",
-      }, "-=0.4");
-
+      })
+        .from(
+          ".loader-ring",
+          {
+            drawSVG: "0%",
+            strokeDashoffset: circumference,
+            duration: 1.5,
+            ease: "power2.out",
+          },
+          "<"
+        )
+        .from(
+          ".loader-text",
+          {
+            y: 20,
+            opacity: 0,
+            stagger: 0.2,
+            duration: 0.8,
+            ease: "power3.out",
+          },
+          "-=0.5"
+        );
     },
     { scope: containerRef }
   );
@@ -87,20 +87,23 @@ const PageLoader = ({ onLoadComplete }) => {
           onComplete: () => onLoadComplete?.(),
         });
 
+        // Exit Animation
         tl.to(".loader-content", {
+          scale: 0.9,
           opacity: 0,
-          scale: 0.95,
-          duration: 0.6,
+          duration: 0.5,
           ease: "power2.in",
-        }).to(
-          containerRef.current,
-          {
-            opacity: 0,
-            duration: 0.6,
-            ease: "power2.inOut",
-          },
-          "-=0.4"
-        );
+        })
+          .to(
+            containerRef.current,
+            {
+              yPercent: -100,
+              duration: 0.8,
+              ease: "power4.inOut",
+            },
+            "-=0.1"
+          )
+          .set(containerRef.current, { display: "none" });
       }
     },
     { scope: containerRef, dependencies: [isLoaded] }
@@ -109,42 +112,72 @@ const PageLoader = ({ onLoadComplete }) => {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-(--color-bg-primary) overflow-hidden"
+      className="fixed inset-0 z-9999 flex items-center justify-center bg-(--color-bg-primary) text-(--color-text-primary) overflow-hidden"
     >
-      {/* Spotlight */}
-      <div className="loader-spotlight absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle_closest-side,rgba(var(--color-accent-rgb),0.15),transparent)] pointer-events-none" />
+      {/* Background Decor */}
+      <div className="absolute inset-0 z-0 opacity-20">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-(--color-accent) blur-[120px] rounded-full mix-blend-screen" />
+      </div>
 
-      <div className="loader-content flex flex-col items-center gap-6 relative z-10">
-        {/* Logo */}
-        <div className="loader-logo relative w-28 h-28 md:w-36 md:h-36 flex items-center justify-center rounded-full bg-(--color-surface)/10 backdrop-blur-md border border-(--color-border)/20 shadow-2xl">
-          <div className="absolute inset-0 rounded-full bg-linear-to-tr from-(--color-accent)/10 to-transparent opacity-50" />
-          <img
-            src={vanLogo}
-            alt="M Rivan Sahronie"
-            className="w-16 h-16 md:w-20 md:h-20 object-contain drop-shadow-lg relative z-10"
-          />
+      <div className="loader-content relative z-10 flex flex-col items-center justify-center">
+        {/* Circular Progress & Image */}
+        <div className="relative mb-8">
+          {/* Rotating Outer Ring (Decoration) */}
+          <div className="absolute inset-[-10px] border border-(--color-border) rounded-full opacity-30 animate-spin-slow" />
+
+          {/* SVG Progress Ring */}
+          <svg
+            height={radius * 2}
+            width={radius * 2}
+            className="transform -rotate-90 drop-shadow-lg"
+          >
+            <circle
+              stroke="var(--color-surface)"
+              strokeWidth={stroke}
+              fill="transparent"
+              r={normalizedRadius}
+              cx={radius}
+              cy={radius}
+            />
+            <circle
+              className="loader-ring transition-all duration-100 ease-linear"
+              stroke="var(--color-accent)"
+              strokeWidth={stroke}
+              strokeDasharray={circumference + " " + circumference}
+              style={{ strokeDashoffset }}
+              strokeLinecap="round"
+              fill="transparent"
+              r={normalizedRadius}
+              cx={radius}
+              cy={radius}
+            />
+          </svg>
+
+          {/* Profile Image Center */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-[88px] h-[88px] rounded-full overflow-hidden border-2 border-(--color-bg-primary) shadow-inner">
+              <img
+                src={ppVan}
+                alt="Profile"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
         </div>
 
-        {/* Name */}
-        <div className="loader-name">
-           <h1 className="text-sm md:text-base font-medium tracking-[0.3em] text-(--color-text-primary) uppercase text-center">
-              M Rivan Sahronie
-           </h1>
-        </div>
+        {/* Text Content */}
+        <div className="flex flex-col items-center gap-2">
+          <div className="loader-text overflow-hidden">
+            <h1 className="text-4xl md:text-5xl font-light tabular-nums tracking-tighter text-(--color-text-primary)">
+              {Math.round(progress)}%
+            </h1>
+          </div>
 
-        {/* Progress Bar */}
-        <div className="loader-bar-container w-48 md:w-64 h-[2px] bg-(--color-surface) rounded-full overflow-hidden relative mt-2">
-          <div 
-            className="h-full bg-(--color-accent) transition-all duration-100 ease-linear relative shadow-[0_0_10px_var(--color-accent)]"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-
-        {/* Percentage */}
-        <div className="loader-percent">
-          <span className="text-xs font-medium tabular-nums text-(--color-text-tertiary) tracking-widest">
-            {Math.round(progress)}%
-          </span>
+          <div className="loader-text overflow-hidden">
+            <p className="text-sm font-medium tracking-[0.4em] text-(--color-text-secondary) uppercase pl-1">
+              {contactData.name}
+            </p>
+          </div>
         </div>
       </div>
     </div>

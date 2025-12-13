@@ -19,10 +19,10 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    fallbackLng: "id", // Default language is Indonesian
-    lng: "id", // Force start with Indonesian
+    fallbackLng: "id",
+    lng: "id",
     interpolation: {
-      escapeValue: false, // react already safes from xss
+      escapeValue: false,
     },
   });
 

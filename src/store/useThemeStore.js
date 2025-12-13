@@ -20,6 +20,11 @@ const useThemeStore = create(
         if (typeof window !== "undefined") {
           const root = window.document.documentElement;
           root.setAttribute("data-theme", newTheme);
+          if (newTheme === "dark") {
+            root.classList.add("dark");
+          } else {
+            root.classList.remove("dark");
+          }
         }
       },
 
@@ -28,6 +33,11 @@ const useThemeStore = create(
         if (typeof window !== "undefined") {
           const root = window.document.documentElement;
           root.setAttribute("data-theme", theme);
+          if (theme === "dark") {
+            root.classList.add("dark");
+          } else {
+            root.classList.remove("dark");
+          }
         }
       },
     }),
@@ -43,7 +53,13 @@ const useThemeStore = create(
 // Inisialisasi tema saat load
 if (typeof window !== "undefined") {
   const initialTheme = useThemeStore.getState().theme;
-  document.documentElement.setAttribute("data-theme", initialTheme);
+  const root = document.documentElement;
+  root.setAttribute("data-theme", initialTheme);
+  if (initialTheme === "dark") {
+    root.classList.add("dark");
+  } else {
+    root.classList.remove("dark");
+  }
 }
 
 export default useThemeStore;

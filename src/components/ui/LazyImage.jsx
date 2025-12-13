@@ -2,9 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { cn } from "@/utils";
 
-/**
- * LazyImage Component - Optimized image loading with blur-up effect
- */
 const LazyImage = ({ src, alt, className = "", onLoad, onError, ...props }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
@@ -25,7 +22,7 @@ const LazyImage = ({ src, alt, className = "", onLoad, onError, ...props }) => {
         });
       },
       {
-        rootMargin: "50px", // Start loading 50px before image enters viewport
+        rootMargin: "50px",
         threshold: 0.01,
       }
     );

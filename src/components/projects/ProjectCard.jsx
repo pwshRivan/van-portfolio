@@ -2,9 +2,7 @@ import { memo } from "react";
 import PropTypes from "prop-types";
 import { ExternalLink, Github } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Card, Badge, Button, LazyImage } from "@/components/ui";
-
-// --- Sub-components to separate concerns ---
+import { Card, Button, LazyImage } from "@/components/ui";
 
 const ProjectActionsDesktop = ({ project, onUnavailableClick }) => (
   <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-all duration-200 hidden lg:flex items-center justify-center gap-4">
@@ -111,8 +109,7 @@ ProjectActionsMobile.propTypes = {
   onUnavailableClick: PropTypes.func.isRequired,
 };
 
-// --- Main Component ---
-
+// main components
 const ProjectCard = memo(({ project, onUnavailableClick }) => {
   const { t } = useTranslation();
 
@@ -129,8 +126,6 @@ const ProjectCard = memo(({ project, onUnavailableClick }) => {
             src={project.image}
             alt={project.title}
             className="w-full h-full object-cover"
-            // Adding specific sizes/aspect ratio if possible helps CLS,
-            // but w-full h-full with container constraint is usually enough.
           />
           <ProjectActionsDesktop
             project={project}
@@ -151,13 +146,12 @@ const ProjectCard = memo(({ project, onUnavailableClick }) => {
           {/* Stack Teknologi */}
           <div className="flex flex-wrap gap-2 mt-auto">
             {project.tech.map((tech) => (
-              <Badge
+              <span
                 key={tech}
-                variant="secondary"
-                className="px-3 py-1 text-xs font-medium rounded-full transition-all duration-200 cursor-default bg-(--color-overlay) text-(--color-text-secondary) hover:bg-(--color-overlay-hover) border-none"
+                className="px-3 py-1 text-xs font-medium rounded-full transition-all duration-200 cursor-default bg-(--color-overlay) text-(--color-text-secondary) hover:bg-(--color-overlay-hover)"
               >
                 {tech}
-              </Badge>
+              </span>
             ))}
           </div>
 
