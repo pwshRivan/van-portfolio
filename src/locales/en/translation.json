@@ -3,21 +3,17 @@
     "home": "Home",
     "about": "About",
     "skills": "Skills",
-    "journey": "Journey",
     "experience": "Experience",
-    "education": "Education",
     "projects": "Projects",
-    "contact": "Contact",
-    "resume": "Resume"
+    "contact": "Contact"
   },
   "hero": {
-    "available": "Available for new projects",
     "title_1": "Hello, I'm",
     "title_highlight": "Muhamad Rivan Sahronie",
     "title_2": "Web Developer",
     "view_work": "My Work",
     "subtitle": "I love building interactive web experiences.",
-    "description": "I'm a Web Developer passionate about building functional and performant websites. I enjoy learning new skills and implementing them in real life!",
+    "description": "Building modern websites with a simple, efficient, and user-centered approach.",
     "cta_primary": "Get In Touch",
     "cta_secondary": "See Projects"
   },
@@ -36,17 +32,11 @@
     "unavailable_desc": "This project is currently in development and not yet publicly accessible. Please check back later or explore the source code on GitHub.",
     "close": "Close"
   },
-  "cta": {
-    "badge": "Let's Work Together",
-    "title": "Interested in Working Together?",
-    "subtitle": "Have an exciting project idea? Let's discuss and bring it to life together.",
-    "button": "Get in Touch"
-  },
   "about": {
     "badge": "About Me",
     "title": "Beyond the Code",
     "subtitle": "I am passionate about contributing to the digital world through creative and innovative solutions.",
-    "p1": "Informatics Engineering graduate with core competencies in modern web interface development using HTML, CSS, JavaScript, and frameworks such as React.js and Tailwind CSS.",
+    "p1": "Informatics Engineering graduate with core competencies in modern web interface development using HTML, CSS, JavaScript.",
     "p2": "Experienced in building responsive frontend features, implementing user interface designs, and collaborating in cross-functional product development through the Bangkit Academy 2024 program.",
     "quote": "\"Everything you can imagine is real.\"",
     "download_cv": "Download CV"
@@ -55,11 +45,6 @@
     "badge": "Work Experience",
     "title": "Professional Journey",
     "subtitle": "Professional experience and career milestones."
-  },
-  "education": {
-    "badge": "Education",
-    "title": "Academic Background",
-    "subtitle": "Academic background and learning journey."
   },
   "contact": {
     "title": "Let's Connect",
@@ -84,9 +69,6 @@
   "data": {
     "ewastepas_desc": "A platform for electronic waste collection built with React and Tailwind CSS.",
     "babygrowth_desc": "Backend RESTful API for predicting infant growth using Node.js and GCP.",
-    "taskflow_desc": "Modern project management platform with real-time collaboration and analytics.",
-    "ecommerce_desc": "A comprehensive dashboard built with React 19 and Recharts.",
-    "social_desc": "Real-time social platform with WebSocket integration.",
     "exp_gdc_role": "Curriculum Developer – Cloud Computing",
     "exp_gdc_company": "Google Developer On Campus – Universitas Pasundan",
     "exp_gdc_desc": "Developed practical learning materials related to Google Cloud Platform, API integration, and deployment workflows. Conducted internal workshops and mentoring sessions.",
@@ -95,12 +77,6 @@
     "exp_bangkit_desc": "Studied cloud architecture, REST API integration, and deployment using Google Cloud Platform. Developed a collaborative capstone project integrating Machine Learning, backend API, and Compute Engine.",
     "exp_granesia_role": "Web Developer Intern",
     "exp_granesia_company": "PT. Granesia Group Pikiran Rakyat",
-    "exp_granesia_desc": "Assisted in building the company's profile website using PHP, HTML, CSS, and JavaScript. Responsible for page structure, interface layout, and ensuring responsive design.",
-    "edu_unpas_school": "Universitas Pasundan",
-    "edu_unpas_degree": "Bachelor of Informatics Engineering",
-    "edu_unpas_desc": "Focus on web application development, user interface design, and responsive web design. Participating in the 2024 Bangkit Academy Cloud Computing Program.",
-    "edu_smk_school": "SMK Angkasa Husein Sastranegara Bandung",
-    "edu_smk_degree": "Software Engineering",
-    "edu_smk_desc": "Focus on web-based system development and application programming. Final Score: 85.8/100"
+    "exp_granesia_desc": "Assisted in building the company's profile website using PHP, HTML, CSS, and JavaScript. Responsible for page structure, interface layout, and ensuring responsive design."
   }
 }

@@ -3,21 +3,17 @@
     "home": "Beranda",
     "about": "Tentang",
     "skills": "Keahlian",
-    "journey": "Perjalanan",
     "experience": "Pengalaman",
-    "education": "Pendidikan",
     "projects": "Proyek",
-    "contact": "Kontak",
-    "resume": "Resume"
+    "contact": "Kontak"
   },
   "hero": {
-    "available": "Siap untuk proyek baru",
     "title_1": "Halo, saya",
     "title_highlight": "Muhamad Rivan Sahronie",
     "title_2": "Web Developer",
     "view_work": "Lihat Karya",
     "subtitle": "Saya senang membangun pengalaman web yang interaktif.",
-    "description": "Saya adalah Web Developer yang bersemangat dalam membangun situs web yang fungsional dan berkinerja tinggi. Saya senang mempelajari keterampilan baru dan menerapkannya dalam kehidupan nyata!",
+    "description": "Membangun website modern dengan pendekatan yang sederhana, efisien, dan berorientasi pada pengguna",
     "cta_primary": "Hubungi Saya",
     "cta_secondary": "Lihat Proyek"
   },
@@ -36,17 +32,11 @@
     "unavailable_desc": "Proyek ini sedang dalam tahap pengembangan dan belum dapat diakses secara publik. Silakan cek kembali nanti atau jelajahi kode sumber di GitHub.",
     "close": "Tutup"
   },
-  "cta": {
-    "badge": "Mari Bekerja Sama",
-    "title": "Tertarik Bekerja Sama?",
-    "subtitle": "Punya ide proyek yang menarik? Mari kita diskusikan dan wujudkan bersama.",
-    "button": "Hubungi Saya"
-  },
   "about": {
     "badge": "Tentang Saya",
     "title": "Di Balik Kode",
     "subtitle": "Saya sangat bersemangat untuk berkontribusi pada dunia digital melalui solusi kreatif dan inovatif.",
-    "p1": "Lulusan S1 Teknik Informatika dengan kompetensi utama dalam pengembangan antarmuka web modern menggunakan HTML, CSS, JavaScript, serta framework seperti React.js dan Tailwind CSS.",
+    "p1": "Lulusan S1 Teknik Informatika dengan kompetensi utama dalam pengembangan antarmuka web modern menggunakan HTML, CSS, JavaScript.",
     "p2": "Berpengalaman membangun fitur frontend yang responsif, mengimplementasikan desain antarmuka, dan berkolaborasi dalam pengembangan produk digital melalui program Bangkit Academy 2024.",
     "quote": "\"Segala sesuatu yang dapat kamu bayangkan adalah nyata.\"",
     "download_cv": "Unduh CV"
@@ -55,11 +45,6 @@
     "badge": "Pengalaman Kerja",
     "title": "Perjalanan Profesional",
     "subtitle": "Pengalaman profesional dan pencapaian karir."
-  },
-  "education": {
-    "badge": "Pendidikan",
-    "title": "Latar Belakang Akademik",
-    "subtitle": "Latar belakang akademik dan perjalanan belajar."
   },
   "contact": {
     "title": "Mari Terhubung",
@@ -84,9 +69,6 @@
   "data": {
     "ewastepas_desc": "Platform untuk antar jemput sampah elektronik yang dibangun dengan React dan Tailwind CSS.",
     "babygrowth_desc": "Backend RESTful API untuk prediksi pertumbuhan bayi menggunakan Node.js dan GCP.",
-    "taskflow_desc": "Platform manajemen proyek modern dengan real-time collaboration dan analytics.",
-    "ecommerce_desc": "Dashboard komprehensif yang dibangun dengan React 19 dan Recharts.",
-    "social_desc": "Platform sosial real-time dengan integrasi WebSocket.",
     "exp_gdc_role": "Pengembang Kurikulum – Cloud Computing",
     "exp_gdc_company": "Google Developer On Campus – Universitas Pasundan",
     "exp_gdc_desc": "Menyusun materi pembelajaran terkait Google Cloud Platform, API Integration, dan deployment. Menyelenggarakan workshop internal dan mentoring untuk mahasiswa.",
@@ -95,12 +77,6 @@
     "exp_bangkit_desc": "Mempelajari arsitektur cloud, REST API integration, dan cloud deployment pada Google Cloud Platform. Mengembangkan capstone project kolaboratif mencakup integrasi Machine Learning, API backend, dan Compute Engine.",
     "exp_granesia_role": "Magang Web Developer",
     "exp_granesia_company": "PT. Granesia Group Pikiran Rakyat",
-    "exp_granesia_desc": "Membantu pembuatan website company profile perusahaan menggunakan PHP, HTML, CSS, dan JavaScript. Bertanggung jawab pada pembuatan struktur halaman, pengaturan tampilan antarmuka.",
-    "edu_unpas_school": "Universitas Pasundan",
-    "edu_unpas_degree": "Sarjana Teknik Informatika",
-    "edu_unpas_desc": "Fokus pada pengembangan aplikasi web, desain antarmuka pengguna, dan penerapan responsive web design. Mengikuti program Bangkit Academy 2024 Cloud Computing Path.",
-    "edu_smk_school": "SMK Angkasa Husein Sastranegara Bandung",
-    "edu_smk_degree": "Rekayasa Perangkat Lunak",
-    "edu_smk_desc": "Fokus pada pengembangan sistem berbasis web dan pemrograman aplikasi. Nilai Akhir : 85.8/100"
+    "exp_granesia_desc": "Membantu pembuatan website company profile perusahaan menggunakan PHP, HTML, CSS, dan JavaScript. Bertanggung jawab pada pembuatan struktur halaman, pengaturan tampilan antarmuka."
   }
 }

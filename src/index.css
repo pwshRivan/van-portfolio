@@ -82,7 +82,6 @@ html {
   scroll-padding-top: 80px;
 }
 
-/* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
